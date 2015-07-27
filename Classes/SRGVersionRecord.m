@@ -10,18 +10,14 @@
 
 @implementation SRGVersionRecord
 
-+ (instancetype)recordWithVersion:(NSString *)version
-                             date:(NSDate *)date {
-    return [[[self class] alloc] initWithVersion:version
-                                            date:date
-    ];
-    
++ (instancetype)recordWithVersion:(NSString *)version versionString:(NSString*)versionString date:(NSDate *)date {
+    return [[[self class] alloc] initWithVersion:version versionString:versionString date:date];
 }
 
-- (instancetype)initWithVersion:(NSString *)version
-                           date:(NSDate *)date {
+- (instancetype)initWithVersion:(NSString *)version versionString:(NSString*)versionString date:(NSDate *)date {
     if( self = [super init]){
         _version = version;
+		_versionString = versionString;
         _date    = date;
     }
     return self;
@@ -30,6 +26,7 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if( [self init]){
         _version = [decoder decodeObjectForKey:@"version"];
+		_versionString = [decoder decodeObjectForKey:@"versionString"];
         _date    = [decoder decodeObjectForKey:@"date"];
     }
     return self;
@@ -37,6 +34,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:_version forKey:@"version"];
+	[coder encodeObject:_versionString forKey:@"versionString"];
     [coder encodeObject:_date    forKey:@"date"];
 }
 

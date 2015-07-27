@@ -28,8 +28,7 @@
         [weakSelf _showMessageOnInstall];
     }];
     [_appVerWatcher executeOnceAfterUpdate:^(NSString *from,NSString *to){
-        [weakSelf _showMessageOnUpdateWithFrom:from
-                                            to:to];
+        [weakSelf _showMessageOnUpdateWithFrom:from to:to];
     }];
     [self _showDetailToLog];
 }

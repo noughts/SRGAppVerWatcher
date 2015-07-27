@@ -43,9 +43,7 @@ static NSString *PersistentHistoryKey = @"SRGAppVerWatcher.History";
     _enableUpdateDispatcher  = (
         !_versionHistory.isEmpty
             &&
-        ![_versionHistory.latestRecord
-            isEqualVersionTo: [self p_appVersion]
-        ]
+        ![_versionHistory.latestRecord isEqualVersionTo: [self p_appVersion]]
     );
     if( _enableInstallDispatcher || _enableUpdateDispatcher){
         [self p_addCurrentVersionToRecord];
@@ -53,12 +51,7 @@ static NSString *PersistentHistoryKey = @"SRGAppVerWatcher.History";
 }
 
 - (void) p_addCurrentVersionToRecord {
-    [_versionHistory addRecord:
-        [SRGVersionRecord
-            recordWithVersion:[self p_appVersion]
-            date:[self p_now]
-         ]
-    ];
+    [_versionHistory addRecord:[SRGVersionRecord recordWithVersion:[self p_appVersion] versionString:[self p_appVersionString] date:[self p_now]]];
     [self p_persistHistory];
 }
 
@@ -132,6 +125,11 @@ static NSString *PersistentHistoryKey = @"SRGAppVerWatcher.History";
 - (NSString *) p_appVersion {
     if( _fakedVersion ){ return _fakedVersion; }
     return  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+}
+
+- (NSString *) p_appVersionString {
+	if( _fakedVersion ){ return _fakedVersion; }
+	return  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 }
 
 - (NSDate *) p_now{

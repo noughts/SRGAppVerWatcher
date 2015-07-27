@@ -11,11 +11,10 @@
 @interface SRGVersionRecord : NSObject< NSCoding >
 
 @property (readonly) NSString *version;
+@property (readonly) NSString *versionString;
 @property (readonly) NSDate *date;
 
-+ (instancetype) recordWithVersion:(NSString *)version
-                              date:(NSDate *)date
-;
++ (instancetype) recordWithVersion:(NSString *)version versionString:(NSString*)versionString date:(NSDate *)date;
 - (BOOL) isEqualVersionTo:(NSString *)version;
 
 @end
